@@ -70,12 +70,13 @@ matrix& matrix::multiply(double x)
 	/*
 		The multiply member function multplies the elements of this matrix by a scalar. x*[M]=[xM]
 	*/
-
-	e00*=x;
-	e01*=x;
-	e10*=x;
-	e11*=x;
-	printf ("\n\n%.3f %.3f \n%.3f %.3f", e00, e01, e10, e11); // prints a 2x2 matrix with elements a, b, c, d as e00, e01, e10, and e11 respectively
+	double b00, b01, b10, b11;
+	b00 = e00*x;
+	b01 = e01*x;
+	b10 = e10*x;
+	b11 = e11*x;
+	printf("\nThe scalar multiplied matrix is:");
+	printf("\n|%.3f %.3f| \n|%.3f %.3f|\n", b00, b01, b10, b11); // prints a 2x2 matrix with elements a, b, c, d as e00, e01, e10, and e11 respectively
 
 	return *this;
 }
@@ -92,8 +93,8 @@ matrix& matrix::multiply(matrix& a)
 	new10 = (e10*a.e00)+(e11*a.e10);
 	new11 = (e10*a.e01)+(e11*a.e11);
 
-
-	printf ("\n\n%.3f %.3f \n%.3f %.3f", new00, new01, new10, new11); // prints a 2x2 matrix with elements a, b, c, d as e00, e01, e10, and e11 respectively
+printf("\nThe resultant matrix multiplied matrix is:");
+	printf ("\n|%.3f %.3f| \n|%.3f %.3f|\n", new00, new01, new10, new11); // prints a 2x2 matrix with elements a, b, c, d as e00, e01, e10, and e11 respectively
 
 	return *this;
 }
@@ -101,25 +102,26 @@ matrix& matrix::multiply(matrix& a)
 //This function is used to determine the element of the target matrix with input of row, column
 double matrix::element(int row,int column)
 {
-	int a, b = 0;
-	row = a;
-	column = b;
+	int a, b;
+	a = row;
+	b = column;
+	printf("\n\nThe matrix element with row = %i, and column = %i\n", a,b);
 	if(a == 0 && b == 0)
 	{
-		printf("\n\n%.3f", e00);
+		printf("\n%.3f", e00);
 	}
 
 	if(a == 0 && b == 1)
 	{
-		printf("\n\n%.3f", e01);
+		printf("\n%.3f", e01);
 	}
 	if(a == 1 && b == 0)
 	{
-		printf ("\n\n%.3f", e10);
+		printf ("\n%.3f", e10);
 	}
 	if(a == 1 && b == 1)
 	{
-		printf("\n\n%.3f", e11);
+		printf("\n%.3f", e11);
 	}
 }
 
@@ -128,6 +130,7 @@ double matrix::determinant()
 {
 	double determinant = (e00*e11)-(e01*e10);
 	printf("\n");
+	printf("The determinant of the matrix is:\n");
 	printf("%.2f", determinant);
 	return determinant;
 }
@@ -139,16 +142,18 @@ matrix& matrix::inverse()
 	//printf("\nInverse Determinant is:%.2f", inverseDeterminant);
 	int a = 0;
 	a = e00;
-	e00 = e11*inverseDeterminant;
-	e11 = a*inverseDeterminant;
-	e01 = -e01*inverseDeterminant;
-	e10 = -e10*inverseDeterminant;
-	printf("\n\nThe inverse of Matrix M is:\n%.3f %.3f \n%.3f %.3f", e00, e01, e10, e11);
+	double c00, c01, c10, c11;
+	c00 = e11*inverseDeterminant;
+	c11 = a*inverseDeterminant;
+	c01 = -e01*inverseDeterminant;
+	c10 = -e10*inverseDeterminant;
+	printf("\n\nThe inverse of Matrix M is:\n|%.3f %.3f| \n|%.3f %.3f|\n", c00, c01, c10, c11);
 	return *this;
 }
 
 //this function will print the matrix
 void matrix::print()
 {
-	printf ("\n%.3f %.3f \n%.3f %.3f", e00, e01, e10, e11);
+	printf("\nThe matrix requested is:");
+	printf ("\n|%.3f %.3f| \n|%.3f %.3f|\n", e00, e01, e10, e11);
 }
